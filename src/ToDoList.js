@@ -8,12 +8,12 @@ function ToDoList(props){
         setUserInput("")
     }
    
-    const newData=props.list.map((item)=>{
-        return  <li  key={item.id}><div className="Todo-item">
+    const newData=props.list.map((item,index)=>{
+        return  <li  key={index}><div className="Todo-item">
            {item.done && <span className="done">&#10003;</span>}   
             <span className={item.done ? "strike" : ""}
-          onClick={()=>{props.toggleTask(item.id)}}>{item.name}</span>
-            <button className="close" onClick={()=>{props.deleteTask(item.id)}}>x</button>
+          onClick={()=>{props.toggleTask(index)}}>{item.name}</span>
+            <button className="close" onClick={()=>{props.deleteTask(index)}}>x</button>
             </div>
             </li>
        })

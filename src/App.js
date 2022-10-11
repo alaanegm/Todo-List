@@ -10,30 +10,25 @@ function App() {
     {id: 3, name: "meet George", done: false},
     {id: 4, name: "Read  Books", done: false}
     ]);
-   console.log(data)
+    console.log(data)
     const addTask = (userInput ) => {
       let List = [...data];
       List = userInput ? [...List, { id: data.length + 1, name: userInput, done: false }]:data;
+      
       setData(List);
      
     }
-   function deleteTask(id){
-    let List =data.filter((item)=>{
-        return  item.id !== id
-    })
-    setData(List);  
-    console.log("delete")
-   }
-    function toggleTask(id){
-      let List=data.map((item)=>{
-         return (item.id === id) ? { ...item, done: !item.done } : { ...item};
-        })
-      setData(List);  
-      console.log("toggle")
+    function removeTask (index)  {
+      const newTasks = [...data];
+      newTasks.splice(index, 1);
+      setData(newTasks);
     }
-  
-  
-  console.log(data)
+ 
+   const toggleTask = index => {
+    const List = [...data];
+    List[index].done = !List[index].done;
+    setData(List);
+  };
   
   return (
    <>
@@ -43,7 +38,7 @@ function App() {
 						</svg></p>
         <ToDoList  list={data} addTask={addTask} 
         toggleTask={toggleTask}
-        deleteTask={deleteTask}/>
+        deleteTask={removeTask}/>
        </div>
   </>
     );
